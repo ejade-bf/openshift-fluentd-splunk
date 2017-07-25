@@ -10,7 +10,6 @@
     * [Environment Setup](#environment-setup)
     * [Create Build Configuration and Image](#create-build-configuration-and-image)
     * [Update Existing ConfigMap](#update-existing-configmap)
-    * [Configure Fluentd Loggers](#configure-fluentd-loggers)
     * [Filtering](#filtering)
 * [Resources](#resources)
 
