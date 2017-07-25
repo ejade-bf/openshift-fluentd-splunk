@@ -86,8 +86,7 @@ containers:
 ```
 
 Run the following commands to redeploy the fluentd pods.
-```bash[Public Domain](#public-domain)
-* [License](#license)
+```bash
 oc project logging
 oc delete pod -l component=fluentd
 ```
