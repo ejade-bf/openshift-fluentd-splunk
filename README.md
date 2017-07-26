@@ -10,6 +10,8 @@
     * [Environment Setup](#environment-setup)
     * [Create Build Configuration and Image](#create-build-configuration-and-image)
     * [Update Existing ConfigMap](#update-existing-configmap)
+    * [Update Existing Daemon Set](#update-existing-daemon-set)
+    * [Redeploy Fluentd Pods](#redeploy-fluentd-pods)
 * [Resources](#resources)
 
 
@@ -30,21 +32,22 @@ The EFK stack should already be configured in the `logging` namespace.
 
 ### Create Build Configuration and Image
 
-
 Run the following commands to create the build configuration and ImageStream.
 ```bash
 oc project logging
 oc new-app registry.access.redhat.com/openshift3/logging-fluentd:latest~https://github.com/themoosman/openshift-fluentd-splunk.git
 ```
 
+
 ### Update Existing ConfigMap
 
-Add the following section to the ConfigMap to create a new splunk configuration file.  
+Add the following section to the ConfigMap to create a new splunk configuration file.  The example below will only forward kubernetes messages.  To forward all messages just use the `<store>` block without the filter.  
+
 Update the host with the correct Splunk hostname.
 
 ```yaml
 output-extra-splunk.conf: |
-  <store>
+  <store kubernetes.**>
     @type splunk_ex
     host mysplunkserver
     port 9997
@@ -52,12 +55,16 @@ output-extra-splunk.conf: |
   </store>
 ```
 
+### Update Existing Daemon Set
+
 Update the `logging-fluentd` daemonset to use new fluentd image
 ```yaml
 containers:
   - name: fluentd-elasticsearch
     image: 'logging/openshift-fluentd-splunk:latest'
 ```
+
+### Redeploy Fluentd Pods
 
 Run the following commands to redeploy the fluentd pods.
 ```bash
