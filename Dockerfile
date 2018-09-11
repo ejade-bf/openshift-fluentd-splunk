@@ -16,6 +16,4 @@ RUN gem install -N --conservative --minimal-deps --no-document \
 
 RUN yum remove gcc make ruby-devel -y
 
-RUN yum autoclean -y
-
 RUN rm -rf /var/cache/yum/*
