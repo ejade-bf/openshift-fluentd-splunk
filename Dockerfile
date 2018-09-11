@@ -14,10 +14,8 @@ RUN gem install -N --conservative --minimal-deps --no-document \
        fluent-plugin-record-modifier \
        fluent-plugin-splunk-ex
 
-RUN yum remove gcc make ruby-devel
+RUN yum remove gcc make ruby-devel -y
 
-RUN yum autoclean
-
-RUN yum-config-manager --disable rhel-7-server-rpms rhel-7-server-optional-rpms
+RUN yum autoclean -y
 
 RUN rm -rf /var/cache/yum/*
