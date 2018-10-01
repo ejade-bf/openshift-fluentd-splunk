@@ -12,7 +12,7 @@ RUN gem install -N --conservative --minimal-deps --no-document \
        fluent-plugin-secure-forward \
        fluent-plugin-remote_syslog \
        fluent-plugin-record-modifier \
-       fluent-plugin-splunk-ex
+       fluent-plugin-splunk-enterprise
 
 RUN yum remove gcc make ruby-devel -y
 
